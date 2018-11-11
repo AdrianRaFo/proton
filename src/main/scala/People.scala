@@ -14,3 +14,8 @@
 //@message final case class PeopleResponse(
 //    result: Person :+: NotFoundError :+: DuplicatedPersonError :+: CNil)
 //    extends People
+//
+//object Gender extends Enumeration with People {
+//  type Gender = Value
+//  val Male, Female = Value
+//}
