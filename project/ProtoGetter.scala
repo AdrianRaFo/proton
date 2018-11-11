@@ -14,6 +14,10 @@ object ProtoGetter {
       case tp                                      => tp.getJavaType.toString.toLowerCase.capitalize
     }
 
+  def getDependencies(fileDesc: FileDescriptor): List[String] =
+    (fileDesc.getDependencies.asScala ++ fileDesc.getPublicDependencies.asScala).map(dep =>
+      s"import ${dep.getPackage}._").toList
+  
   def getAllEnums(allMessages: List[Descriptor]): List[EnumDescriptor] =
     allMessages.flatMap(_.getEnumTypes.asScala)
 

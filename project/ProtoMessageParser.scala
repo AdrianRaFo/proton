@@ -16,18 +16,14 @@ object ProtoMessageParser {
 
     val protocolName = getFileNameWithoutExtension(fileDesc)
     b.setName(s"$protocolName.scala")
-
-    val protoDeps =
-      (fileDesc.getDependencies.asScala ++ fileDesc.getPublicDependencies.asScala).map(dep =>
-        s"import ${dep.getPackage}._")
-
+    
     val topMessages = fileDesc.getMessageTypes.asScala.toList
 
     val messages = getAllMessages(topMessages) ++: topMessages
 
     val hasCoproducts = !messages.flatMap(_.getOneofs.asScala.map(_.getFieldCount)).forall(_ < 3)
 
-    val deps = List("import mu.rpc.protocol._") ++
+    val imports = List("import mu.rpc.protocol._") ++
       (if (hasCoproducts) List("import shapeless.{:+:, CNil}") else List.empty)
 
     val enums =
@@ -36,9 +32,9 @@ object ProtoMessageParser {
     val fp = FunctionalPrinter()
       .add(s"package ${fileDesc.getPackage}")
       .newline
-      .add(protoDeps: _*)
+      .add(getDependencies(fileDesc): _*)
       .newline
-      .add(deps: _*)
+      .add(imports: _*)
       .newline
       .add(s"sealed trait $protocolName extends Product with Serializable")
       .newline
@@ -70,6 +66,7 @@ object ProtoMessageParser {
             .add(s") extends $protocolName")
             .newline
       }
+    
     b.setContent(fp.result)
     b.build
   }
@@ -86,7 +83,7 @@ object ProtoMessageParser {
   def parseOneOf(oneOfDesc: Descriptors.OneofDescriptor, findOptional: Boolean): String = {
     val nullMessage = "Null"
 
-    val fields = oneOfDesc.getFields.asScala.map(getTypeName)
+    val fields       = oneOfDesc.getFields.asScala.map(getTypeName)
     val optionalType = fields.filterNot(_ == nullMessage).headOption.getOrElse("String")
 
     s"${oneOfDesc.getName}: " + (oneOfDesc.getFieldCount match {

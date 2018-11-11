@@ -25,6 +25,7 @@ object RPCProtocolGenerator extends protocbridge.ProtocCodeGenerator {
     val implicits = new DescriptorImplicits(params, fileDescByName.values.toVector)
 
     //TODO order by deps properly
+    //TODO allow include messages on the same file as the services
     request.getFileToGenerateList.asScala
       .map(fileDescByName)
       .sortBy(_.getDependencies.size())
