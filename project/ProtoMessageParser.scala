@@ -16,7 +16,7 @@ object ProtoMessageParser {
 
     val protocolName = getFileNameWithoutExtension(fileDesc)
     b.setName(s"$protocolName.scala")
-    
+
     val topMessages = fileDesc.getMessageTypes.asScala.toList
 
     val messages = getAllMessages(topMessages) ++: topMessages
@@ -66,7 +66,7 @@ object ProtoMessageParser {
             .add(s") extends $protocolName")
             .newline
       }
-    
+
     b.setContent(fp.result)
     b.build
   }
