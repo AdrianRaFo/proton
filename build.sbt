@@ -36,7 +36,7 @@ libraryDependencies ++= Seq(
   "io.higherkindness"     %% "mu-rpc-client-core" % V.muRPC,
   "com.github.pureconfig" %% "pureconfig"         % V.pureconfig,
   "com.thesamet.scalapb"  %% "compilerplugin"     % "0.8.2",
-  "com.google.protobuf"   % "protobuf-java"       % "3.6.1"
+  "com.google.protobuf"   % "protobuf-java"       % "3.6.1" % "protobuf"
 )
 
 // ScalaPB

@@ -1,0 +1,13 @@
+syntax = "proto2";
+
+package tutorial.service;
+
+import "Mu.proto";
+import "Sample2.proto";
+
+service SearchService2  {
+  rpc Search (tutorial.model2.PersonRequest) returns (tutorial.model2.PersonResponse){
+    option (mu.rpc.protobuf.streaming) = bidirectional;
+    option (mu.rpc.protobuf.name) = "search";
+  };
+}

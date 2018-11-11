@@ -1,9 +1,9 @@
 syntax = "proto2";
 
-package tutorial.model;
+package tutorial.model2;
 
-message PersonResponse2 {
-  message Person2 {
+message PersonResponse {
+  message Person {
     required int32 id = 1;
     required string name = 2;
     optional int32 age = 3;
@@ -13,9 +13,9 @@ message PersonResponse2 {
     }
   }
 
-  required Person2 person = 1;
+  required Person person = 1;
 }
 
-message PersonRequest2 {
+message PersonRequest {
   required string name = 1;
 }

@@ -1,11 +1,11 @@
 syntax = "proto3";
 
-package tutorial.model;
+package tutorial.model3;
 
 import "Mu.proto";
 
-message PersonResponse3 {
-  message Person3 {
+message PersonResponse {
+  message Person {
     int32 id = 1;
     string name = 2;
     int32 age = 3;
@@ -15,9 +15,13 @@ message PersonResponse3 {
     }
   }
 
-  Person3 person = 1;
+  oneof result {
+    Person person = 1;
+    int32 duplicated_error = 2;
+    string not_found_error =3;
+  }
 }
 
-message PersonRequest3 {
+message PersonRequest {
   string name = 1;
 }

@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package tutorial.service;
+
+import "Mu.proto";
+import "Sample3.proto";
+
+service SearchService3 {
+  rpc Search (tutorial.model3.PersonRequest) returns (tutorial.model3.PersonResponse);
+}

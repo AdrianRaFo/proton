@@ -1,5 +1,20 @@
-syntax = "proto3";
+syntax = "proto2";
 
 package mu.rpc.protobuf;
 
+import "google/protobuf/descriptor.proto";
+
 message Null {}
+
+enum Streaming {
+  none = 0;
+  input = 1;
+  output = 2;
+  bidirectional = 3;
+}
+
+extend google.protobuf.MethodOptions {
+  /* Minimal for extensions: 1000*/
+  optional Streaming streaming = 1047;
+  optional string name = 1048;
+}
