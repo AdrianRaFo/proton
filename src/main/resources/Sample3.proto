@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package tutorial.model;
+
+import "Mu.proto";
+
+message PersonResponse3 {
+  message Person3 {
+    int32 id = 1;
+    string name = 2;
+    int32 age = 3;
+    oneof contact {
+      string email = 4;
+      mu.rpc.protobuf.Null null = 5;
+    }
+  }
+
+  Person3 person = 1;
+}
+
+message PersonRequest3 {
+  string name = 1;
+}

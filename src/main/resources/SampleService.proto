@@ -1,0 +1,9 @@
+syntax = "proto2";
+
+package tutorial.service;
+
+import "Sample2.proto";
+
+service SearchService {
+  rpc Search (tutorial.model.PersonRequest2) returns (tutorial.model.PersonResponse2);
+}

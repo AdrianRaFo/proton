@@ -1,0 +1,21 @@
+syntax = "proto2";
+
+package tutorial.model;
+
+message PersonResponse2 {
+  message Person2 {
+    required int32 id = 1;
+    required string name = 2;
+    optional int32 age = 3;
+    oneof contact {
+      string email = 4;
+      int32 phone = 5;
+    }
+  }
+
+  required Person2 person = 1;
+}
+
+message PersonRequest2 {
+  required string name = 1;
+}
