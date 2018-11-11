@@ -33,7 +33,6 @@ object ProtoMessageParser {
     val enums =
       parseEnum(protocolName, getAllEnums(messages) ++: fileDesc.getEnumTypes.asScala.toList)
 
-    //TODO ask why needs to extends from trait
     val protocolTrait =
       if (enums.nonEmpty) s"sealed trait $protocolName"
       else s"sealed trait $protocolName extends Product with Serializable"
